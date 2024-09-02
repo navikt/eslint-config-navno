@@ -1,4 +1,4 @@
-name: Build and publish
+name: Test and publish
 
 on:
   workflow_dispatch:
@@ -49,6 +49,8 @@ jobs:
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Run tests
+        run: npm test
       - name: Publish package
         id: publish
         run: npm publish
