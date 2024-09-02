@@ -1,0 +1,62 @@
+name: Build and publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionType:
+        type: choice
+        required: true
+        description: 'Version type'
+        default: 'minor'
+        options:
+          - patch
+          - minor
+          - major
+      releaseBody:
+        type: string
+        required: true
+        description: 'Release description'
+env:
+  NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish:
+    name: Publish to package registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@navikt'
+          cache: 'npm'
+      - name: Bump version
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          echo "VERSION_TAG=$(npm version ${{ github.event.inputs.versionType }})" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Publish package
+        id: publish
+        run: npm publish
+      - name: Push new version tag
+        if: steps.publish.outcome == 'success'
+        run: git push
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.VERSION_TAG }}
+          body: ${{ github.event.inputs.releaseBody }}
