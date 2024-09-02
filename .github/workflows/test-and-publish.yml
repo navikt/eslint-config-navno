@@ -55,6 +55,8 @@ jobs:
       - name: Publish package
         id: publish
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push new version tag
         if: steps.publish.outcome == 'success'
         run: git push
