@@ -2,7 +2,7 @@
 
 ## Installing
 
-`npm install --D @navikt/eslint-config-navno`
+`npm install -D @navikt/eslint-config-navno`
 
 ## General usage
 
@@ -23,7 +23,7 @@ Using esling config in your NextJS project:
 
 This package does not include NextJS specific config, so make sure to also add the `eslint-config-next` package to your project:
 
-`npm install --D eslint-config-next`
+`npm install -D eslint-config-next`
 
 In your `package.json`:
 
