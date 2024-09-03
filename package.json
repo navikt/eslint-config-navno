@@ -5,6 +5,16 @@
         "prettier",
         "eslint"
     ],
+    "exports": {
+        "eslint": {
+            "import": "./eslint/index.js",
+            "require": "./eslint/index.js"
+        },
+        "prettier": {
+            "import": "./prettier/index.js",
+            "require": "./prettier/index.js"
+        }
+    },
     "engines": {
         "node": "20"
     },
