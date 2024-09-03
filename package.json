@@ -6,13 +6,15 @@
         "eslint"
     ],
     "exports": {
-        "eslint": {
+        "./eslint": {
             "import": "./eslint/index.js",
-            "require": "./eslint/index.js"
+            "require": "./eslint/index.js",
+            "default": "./eslint/index.js"
         },
-        "prettier": {
+        "./prettier": {
             "import": "./prettier/index.js",
-            "require": "./prettier/index.js"
+            "require": "./prettier/index.js",
+            "default": "./prettier/index.js"
         }
     },
     "engines": {
