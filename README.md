@@ -1,31 +1,27 @@
-# Common configuration for frontend applications by Team Navno
+# Felles konfigurasjon for frontend-applikasjoner av Team Navno
 
-## Installing
+## Slik installerer du
 
 `npm install -D @navikt/eslint-config-navno`
 
-## General usage
+## Generell bruk
 
-Reference the eslint config in your project:
+Referer til eslint-konfigurasjonen i `package.json`:
 
-In your `package.json`:
-
-```json
+````json
 {
   "eslintConfig": {
     "extends": "@navikt/eslint-config-navno/eslint"
   }
 }
-```
 
-##  Use in NextJS
-Using esling config in your NextJS project:
+##  Bruk i NextJS eller andre rammeverk
 
-This package does not include NextJS specific config, so make sure to also add the `eslint-config-next` package to your project:
+Denne pakken er relativt rammeverk-agnostisk. Pass på at du har lagt til mellomvare eller plugins som trengs i prosjektet. For NextJS er det feks eslint-config-next:
 
 `npm install -D eslint-config-next`
 
-In your `package.json`:
+I `package.json`:
 
 ```json
 {
@@ -33,16 +29,14 @@ In your `package.json`:
     "extends": ["@navikt/eslint-config-navno", "next/core-web-vitals"]
   }
 }
-```
+````
 
-## Use prettier
+## Slik bruker du config for prettier
 
-Reference the prettier config in your project:
-
-In your `package.json`:
+Sett opp referanse til Prettier i `package.json`:
 
 ```json
 {
-  "prettier": "@navikt/eslint-config-navno/prettier"
+    "prettier": "@navikt/eslint-config-navno/prettier"
 }
 ```
